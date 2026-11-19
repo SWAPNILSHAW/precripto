@@ -37,7 +37,6 @@ services:
   - type: web
     name: appointment-frontend
     runtime: static
-    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
@@ -57,7 +56,6 @@ services:
   - type: web
     name: appointment-admin
     runtime: static
-    plan: free
     rootDir: admin
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
