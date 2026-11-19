@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import Hero from "../assets/assets_frontend/Hero.png";
+import Hero from "../assets/assets_frontend/hero.png";
 
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
