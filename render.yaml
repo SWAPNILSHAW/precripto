@@ -1,0 +1,73 @@
+services:
+  # -------------------------------------------------------------
+  # 1. Express Backend API
+  # -------------------------------------------------------------
+  - type: web
+    name: appointment-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false
+      - key: CLOUDINARY_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_SECRET_KEY
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: JWT_SECRETkEY
+        sync: false
+      - key: CURRENCY
+        value: INR
+
+  # -------------------------------------------------------------
+  # 2. Patient Frontend (React + Vite)
+  # -------------------------------------------------------------
+  - type: web
+    name: appointment-frontend
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: VITE_BACKEND_URL
+        sync: false
+
+  # -------------------------------------------------------------
+  # 3. Admin & Doctor Portal (React + Vite)
+  # -------------------------------------------------------------
+  - type: web
+    name: appointment-admin
+    runtime: static
+    plan: free
+    rootDir: admin
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: VITE_BACKEND_URL
+        sync: false
+
